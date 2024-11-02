@@ -94,7 +94,7 @@ function challenge() {
         resultPopup.textContent = `${coinAmount}コインのカードを引きました！`;
     }
     resultPopup.classList.add("visible");
-    setTimeout(() => resultPopup.classList.remove("visible"), 2000);
+    setTimeout(() => resultPopup.classList.remove("visible"), 8000);
     updateUI();
 }
 
