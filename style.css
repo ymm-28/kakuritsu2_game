@@ -1,0 +1,113 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #6dd5ed, #2193b0);
+}
+
+.game-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    width: 350px;
+    color: #333;
+}
+
+.stats p {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+h2 {
+    margin-top: 20px;
+    font-size: 1.3em;
+    color: #444;
+}
+
+.card-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.card {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 8px;
+    color: #333;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.card.coin {
+    background-color: #ffeb3b;
+}
+
+.card.point {
+    background-color: #4caf50;
+    color: white;
+}
+
+.card:hover {
+    transform: scale(1.1);
+}
+
+.action-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #ff5722;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: #e64a19;
+}
+
+.popup {
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    visibility: hidden;
+}
+
+.popup.visible {
+    visibility: visible;
+    background-color: #ffeb3b;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.price-label {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 5px;
+}

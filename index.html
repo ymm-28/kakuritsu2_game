@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カードチャレンジゲーム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>カードチャレンジゲーム</h1>
+        <div class="stats">
+            <p>ターン数: <span id="turn-count">0</span></p>
+            <p>所持コイン: <span id="coins">0</span></p>
+            <p>勝利点: <span id="victory-points">0</span></p>
+        </div>
+        <h2>現在の山札</h2>
+        <div id="deck" class="card-list"></div>
+        
+        <h2>購入できるカード</h2>
+        <div id="available-cards" class="card-list"></div>
+
+        <button class="action-button" onclick="challenge()">チャレンジする</button>
+        <div id="result" class="popup hidden"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
