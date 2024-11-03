@@ -111,3 +111,13 @@ h2 {
     color: #666;
     margin-top: 5px;
 }
+
+/* New discard-specific styling */
+.card.discard {
+    background-color: #6c6b6b;
+    color: white;
+}
+
+.hidden {
+    display: none;
+}

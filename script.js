@@ -2,15 +2,18 @@ let turnCount = 0;
 let coins = 0;
 let victoryPoints = 0;
 let deck = ["1pt", "1pt", "2pt", "1coin", "1coin", "1coin", "2coin"];
+let discardMode = false;
+
 const availableCards = [
     { name: "2coin", cost: 1, type: "coin" },
-    { name: "3coin", cost: 3, type: "coin" },
-    { name: "4coin", cost: 5, type: "coin" },
-    { name: "6coin", cost: 10, type: "coin" },
-    { name: "3pt", cost: 2, type: "point" },
-    { name: "5pt", cost: 5, type: "point" },
-    { name: "7pt", cost: 10, type: "point" },
-    { name: "10pt", cost: 20, type: "point" }
+    { name: "3coin", cost: 5, type: "coin" },
+    { name: "4coin", cost: 10, type: "coin" },
+    { name: "6coin", cost: 15, type: "coin" },
+    { name: "3pt", cost: 3, type: "point" },
+    { name: "5pt", cost: 10, type: "point" },
+    { name: "7pt", cost: 15, type: "point" },
+    { name: "10pt", cost: 30, type: "point" },
+    { name: "廃棄", cost: 5, type: "discard" }
 ];
 
 function updateUI() {
@@ -24,7 +27,12 @@ function updateUI() {
         const cardElement = document.createElement("div");
         cardElement.className = `card ${card.includes("pt") ? "point" : "coin"}`;
         cardElement.textContent = card;
-        cardElement.onclick = () => markForDiscard(index);
+
+        // 廃棄モード時のみ廃棄可能
+        if (discardMode) {
+            cardElement.onclick = () => discardCard(index);
+        }
+
         deckContainer.appendChild(cardElement);
     });
 
@@ -49,32 +57,39 @@ function updateUI() {
     });
 }
 
-
-// 購入処理
 function markForPurchase(index) {
     const card = availableCards[index];
+    
     if (coins >= card.cost) {
-        if (confirm(`${card.name}を${card.cost}コインで購入しますか？`)) {
-            coins -= card.cost;
-            deck.push(card.name);
-            turnCount++;
-            updateUI();
+        if (card.type === "discard") {
+            if (confirm(`廃棄を${card.cost}コインで購入しますか？`)) {
+                coins -= card.cost;
+                discardMode = true; // 廃棄モードに切り替え
+                alert("廃棄モードです。廃棄したいカードを選択してください。");
+            }
+        } else {
+            if (confirm(`${card.name}を${card.cost}コインで購入しますか？`)) {
+                coins -= card.cost;
+                deck.push(card.name);
+                turnCount++;
+            }
         }
+        updateUI();
     } else {
         alert("コインが足りません！");
     }
 }
 
-// 廃棄処理
-function markForDiscard(index) {
+function discardCard(index) {
     if (confirm(`${deck[index]}を廃棄しますか？`)) {
         deck.splice(index, 1);
+        discardMode = false; // 廃棄モード解除
+        alert("カードを廃棄しました。");
         turnCount++;
         updateUI();
     }
 }
 
-// チャレンジ処理
 function challenge() {
     turnCount++;
     if (deck.length === 0) {
@@ -93,8 +108,9 @@ function challenge() {
         coins += coinAmount;
         resultPopup.textContent = `${coinAmount}コインのカードを引きました！`;
     }
+    
     resultPopup.classList.add("visible");
-    setTimeout(() => resultPopup.classList.remove("visible"), 8000);
+    setTimeout(() => resultPopup.classList.remove("visible"), 2000);
     updateUI();
 }
 
